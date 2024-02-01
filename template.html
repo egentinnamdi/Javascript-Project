@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template</title>
+    <link rel="stylesheet" href="./Css/template.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1>Javascript Quiz</h1>
+      </header>
+      <section class="section">
+        <div class="question">
+          <span>%NUMBER%.</span>
+          <p>%QUESTION%</p>
+        </div>
+        <div class="options">
+          <button id="0">%OPT1%</button>
+          <button id="1">%OPT2%</button>
+          <button id="2">%OPT3%</button>
+          <button id="3">%OPT4%</button>
+        </div>
+      </section>
+      <footer class="footer">
+        <button class="btn btn-prev">Previous</button>
+        <span class="btn timer">Loading...</span>
+        <span class="btn count">Loading...</span>
+        <button class="btn btn-next">Next</button>
+      </footer>
+    </div>
+    <script src="./data.js"></script>
+    <script src="./template.js"></script>
+  </body>
+</html>
