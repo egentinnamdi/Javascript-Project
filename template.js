@@ -36,9 +36,7 @@ function processTemplate(dataItem, temp, i) {
 const processedArr = questionData.map((question, index) => {
   return processTemplate(question, template.innerHTML, index);
 });
-template.innerHTML = processedArr.at(index);
-count.textContent = `${index + 1} / ${questionData.length}`;
-update();
+addListenerBack();
 
 // Event Handler Functions
 function handleNext() {
@@ -55,13 +53,11 @@ function handleNext() {
   } else {
     index++;
     btnNext.textContent = `${
-      index === processedArr.length - 1 ? "Finish" : "Next"
+      index === processedArr.length - 1 ? "Submit" : "Next"
     }`;
 
-    template.innerHTML = processedArr.at(index);
-    count.textContent = `${index + 1} / ${questionData.length}`;
-    update();
-    updateData();
+    addListenerBack();
+    rememberFunction();
   }
 }
 
@@ -69,10 +65,8 @@ function handlePrevious() {
   if (index === 0) return;
   index--;
   btnNext.textContent = `${index < processedArr.length - 1 && "Next"}`;
-  template.innerHTML = processedArr.at(index);
-  count.textContent = `${index + 1} / ${questionData.length}`;
-  update();
-  updateData();
+  addListenerBack();
+  rememberFunction();
 }
 
 function handleAnswer(e) {
@@ -107,21 +101,23 @@ function handleAnswer(e) {
 }
 
 // Utility Functions
-function update() {
+function addListenerBack() {
+  template.innerHTML = processedArr.at(index);
+  count.textContent = `${index + 1} / ${questionData.length}`;
   const options = document.querySelectorAll(".options button");
   options.forEach((option, i) => {
     option.addEventListener("click", handleAnswer);
   });
 }
 
-function updateData() {
+function rememberFunction() {
   const retrieveData = JSON.parse(localStorage.getItem("rememberData"));
-  retrieveData.forEach((tbd) => {
-    if (!tbd) return;
-    if (index === tbd.index) {
+  retrieveData.forEach((data) => {
+    if (!data) return;
+    if (index === data.index) {
       const options = document.querySelectorAll(".options button");
       options.forEach((option, i) => {
-        i === tbd.id ? (option.className = "choosen") : null;
+        i === data.id ? (option.className = "choosen") : null;
       });
     }
   });
