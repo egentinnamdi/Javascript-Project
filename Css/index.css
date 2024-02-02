@@ -71,3 +71,8 @@ label {
 .btn:active {
   background: rgba(131, 58, 180, 1);
 }
+.btn a {
+  color: white;
+  text-decoration: none;
+  display: block;
+}

@@ -11,7 +11,9 @@ const btnPrev = document.querySelector(".btn-prev");
 const footer = document.querySelector(".footer");
 const timer = document.querySelector(".timer");
 const count = document.querySelector(".count");
-let setTimer = questionData.length * 30;
+let time = 30;
+let timerID = null;
+let setTimer = questionData.length * time;
 let index = 0;
 let rememberData = [];
 let totalPoints = questionData.reduce(
@@ -49,7 +51,7 @@ function handleNext() {
         : 0
     } / ${totalPoints}</h1>`;
     footer.innerHTML = "";
-    localStorage.setItem("rememberData", JSON.stringify([]));
+    clearInterval(timerID);
   } else {
     index++;
     btnNext.textContent = `${
@@ -124,7 +126,7 @@ function rememberFunction() {
 }
 
 // Timer
-setInterval(() => {
+timerID = setInterval(() => {
   if (setTimer === 0) {
     template.innerHTML = "<h1>Your Time Has Elapsed</h1>";
     footer.innerHTML = "";
