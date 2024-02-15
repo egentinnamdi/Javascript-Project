@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./Css/answer.css" />
+    <style>
+      :root {
+        --bg-color: linear-gradient(
+          90deg,
+          rgba(131, 58, 180, 1) 0%,
+          rgba(253, 29, 29, 1) 50%,
+          rgba(252, 176, 69, 1) 100%
+        );
+      }
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-size: 16px;
+        font-weight: 400;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .container {
+        height: 95vh;
+        background-color: white;
+        border-radius: 20px;
+      }
+
+      .header {
+        padding: 10px;
+        color: white;
+        background: var(--bg-color);
+        margin-bottom: 20px;
+        text-align: center;
+      }
+      .header h1 {
+        font-size: 30px;
+      }
+      .main {
+        padding: 30px;
+      }
+      .display {
+        display: block;
+        border-radius: 10px;
+        padding: 30px;
+        border: rgba(131, 58, 180, 1) solid 2px;
+        margin-bottom: 40px;
+        text-align: center;
+      }
+      .correction {
+        width: 50%;
+        margin: auto;
+        animation: moveIn 1.5s ease-in-out;
+      }
+      span {
+        display: block;
+        color: white;
+        padding: 15px 20px;
+        border-radius: 10px;
+        font-weight: 400;
+        font-size: 20px;
+        background-color: rgba(131, 58, 180, 1);
+        margin: 15px;
+      }
+
+      span.correct {
+        background-color: green;
+        color: white;
+      }
+      span.no-answer {
+        background-color: white;
+        color: white;
+      }
+      span.wrong {
+        background-color: red;
+        color: white;
+      }
+      @keyframes moveIn {
+        0% {
+          transform: translateX(-100%);
+          opacity: 0;
+        }
+        80% {
+          transform: translateX(10%);
+          opacity: 0.8;
+        }
+        100% {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1>Score</h1>
+      </header>
+      <main class="main">
+        <span class="display"></span>
+        <div class="correction"></div>
+      </main>
+    </div>
+    <script src="./answer.js"></script>
+  </body>
+</html>

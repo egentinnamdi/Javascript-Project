@@ -3,49 +3,84 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
+    <title>Project</title>
     <link rel="stylesheet" href="./Css/index.css" />
   </head>
   <body>
     <div class="container">
-      <form>
+      <form id="login-form">
         <div class="form-header">
           <h1>Exam Portal</h1>
         </div>
         <div class="form-body">
           <label for="name">Name</label><br />
-          <!-- hey from the server  -->
           <input
             class="input"
             type="text"
             id="name"
             placeholder="What is your Name?"
-          /><br />
+          />
+          <div id="nameError" class="error"></div>
+          <br />
+
           <label for="subject">Subject</label><br />
           <select class="input" name="" id="subject">
             <option value="">Select Subject</option>
             <option value="javascript">Javascript</option>
-            <!-- <option value="">Maths</option>
-            <option value="">Science</option> -->
           </select>
+          <div id="subjectError" class="error"></div>
           <br />
-          <label for="regno">Registration Number</label><br />
+
+          <label for="regNumber">Registration Number</label><br />
           <input
-            id="regno"
+            id="regNumber"
             class="input"
             type="text"
             placeholder="Input Registration Number"
           />
-          <button class="btn" type="submit">
-            <a href="./template.html">Login</a>
-          </button>
+          <div id="regNumberError" class="error"></div>
+
+          <button type="submit">Login</button>
         </div>
       </form>
     </div>
   </body>
   <script>
-    document.addEventListener("submit", function (e) {
-      e.preventDefault();
-    });
+    document
+      .getElementById("login-form")
+      .addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        var name = document.getElementById("name").value;
+        var subject = document.getElementById("subject").value;
+        var regNumber = document.getElementById("regNumber").value;
+        var nameError = document.getElementById("nameError");
+        var subjectError = document.getElementById("subjectError");
+        var regNumberError = document.getElementById("regNumberError");
+        var isValid = true;
+
+        if (!name) {
+          nameError.textContent = "please fill in the name";
+          isValid = false;
+        } else {
+          nameError.textContent = "";
+        }
+        if (!subject) {
+          subjectError.textContent = "please fill in the subject";
+          isValid = false;
+        } else {
+          subjectError.textContent = "";
+        }
+        if (!regNumber) {
+          regNumberError.textContent = "please fill in the regNumber";
+          isValid = false;
+        } else {
+          regNumberError.textContent = "";
+        }
+
+        if (isValid) {
+          window.location.href = "./template.html";
+        }
+      });
   </script>
 </html>

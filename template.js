@@ -8,7 +8,6 @@ const questionData = JSON.parse(localStorage.getItem("questions"));
 const template = document.querySelector(".section");
 const btnNext = document.querySelector(".btn-next");
 const btnPrev = document.querySelector(".btn-prev");
-const footer = document.querySelector(".footer");
 const timer = document.querySelector(".timer");
 const count = document.querySelector(".count");
 let time = 30;
@@ -16,10 +15,6 @@ let timerID = null;
 let setTimer = questionData.length * time;
 let index = 0;
 let rememberData = [];
-let totalPoints = questionData.reduce(
-  (initial, question) => initial + question.points,
-  0
-);
 let score = [];
 
 // Template and Data Processor
@@ -42,15 +37,8 @@ addListenerBack();
 
 // Event Handler Functions
 function handleNext() {
-  const retrieveData = JSON.parse(localStorage.getItem("rememberData"));
   if (index === processedArr.length - 1) {
-    const retrievedscore = retrieveData[retrieveData.length - 1]?.score;
-    template.innerHTML = `<h1>You Have Successfully Submitted.<br>You scored ${
-      retrievedscore
-        ? retrievedscore.reduce((initial, point) => initial + point, 0)
-        : 0
-    } / ${totalPoints}</h1>`;
-    footer.innerHTML = "";
+    window.location.href = "./answer.html";
     clearInterval(timerID);
   } else {
     index++;
@@ -76,16 +64,16 @@ function handleAnswer(e) {
   const correctOption = questionData.at(index).correctAnswer;
   const points = questionData.at(index).points;
 
-  if (e.target.className === "choosen") {
-    e.target.classList.remove("choosen");
+  if (e.target.className === "chosen") {
+    e.target.classList.remove("chosen");
     rememberData[index] = null;
     localStorage.setItem("rememberData", JSON.stringify(rememberData));
   } else {
     rememberData[index] = { id: +e.target.id, index };
     options.forEach((option, i) => {
       i === +e.target.id
-        ? option.classList.add("choosen")
-        : option.classList.remove("choosen");
+        ? option.classList.add("chosen")
+        : option.classList.remove("chosen");
     });
 
     if (correctOption === +e.target.id) {
@@ -119,7 +107,7 @@ function rememberFunction() {
     if (index === data.index) {
       const options = document.querySelectorAll(".options button");
       options.forEach((option, i) => {
-        i === data.id ? (option.className = "choosen") : null;
+        i === data.id ? (option.className = "chosen") : null;
       });
     }
   });
@@ -128,8 +116,7 @@ function rememberFunction() {
 // Timer
 timerID = setInterval(() => {
   if (setTimer === 0) {
-    template.innerHTML = "<h1>Your Time Has Elapsed</h1>";
-    footer.innerHTML = "";
+    window.location.href = "./answer.html";
   } else {
     const mins = Math.floor(setTimer / 60);
     const secs = Math.floor(setTimer % 60);
